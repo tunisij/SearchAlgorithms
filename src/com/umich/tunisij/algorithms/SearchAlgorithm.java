@@ -1,4 +1,4 @@
-package com.umich.tunisij;
+package com.umich.tunisij.algorithms;
 
 public interface SearchAlgorithm {
 

@@ -1,4 +1,4 @@
-package com.umich.tunisij;
+package com.umich.tunisij.environment;
 
 public class Maze {
 
