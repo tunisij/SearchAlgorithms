@@ -4,6 +4,11 @@ public class Maze {
 
     private String[][] maze;
 
+    private int startRow;
+    private int startColumn;
+    private int goalRow;
+    private int goalColumn;
+
     public Maze(final int lengthRow, final int lengthColumn) {
         this.initializeMaze(lengthRow, lengthColumn);
     }
@@ -21,11 +26,22 @@ public class Maze {
     }
 
     public int getManhattanDistance(int fromRow, int fromColumn) {
-        int distance = 0;
+        int rowDiff = this.goalRow - fromRow;
+        int columnDiff = this.goalColumn - fromColumn;
 
+        if (rowDiff < 0) {
+            rowDiff *= Direction.NORTH.getCost();
+        } else if (rowDiff < 0) {
+            rowDiff *= Direction.SOUTH.getCost();
+        }
 
+        if (columnDiff < 0) {
+            columnDiff *= Direction.EAST.getCost();
+        } else if (columnDiff < 0) {
+            columnDiff *= Direction.WEST.getCost();
+        }
 
-        return distance;
+        return Math.abs(rowDiff) + Math.abs(columnDiff);
     }
 
     public String toString() {
@@ -50,10 +66,14 @@ public class Maze {
     }
 
     public void setStartPosition(int row, int column) {
+        this.startRow = row;
+        this.startColumn = column;
         this.maze[row][column] = "00";
     }
 
     public void setGoalPosition(int row, int column) {
+        this.goalRow = row;
+        this.goalColumn = column;
         this.maze[row][column] = "GG";
     }
 

@@ -13,6 +13,7 @@ public class SearchAlgorithmRunner {
 
     public SearchAlgorithmRunner() {
         this.setMazeState();
+        this.maze.getManhattanDistance(START_ROW, START_COLUMN);
     }
 
     public void step(Direction direction) {
