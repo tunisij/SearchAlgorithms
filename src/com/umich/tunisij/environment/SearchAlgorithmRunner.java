@@ -14,6 +14,7 @@ public class SearchAlgorithmRunner {
     public SearchAlgorithmRunner() {
         this.setMazeState();
         this.maze.getManhattanDistance(START_ROW, START_COLUMN);
+        this.maze.displayManhattanDistance();
     }
 
     public void step(Direction direction) {

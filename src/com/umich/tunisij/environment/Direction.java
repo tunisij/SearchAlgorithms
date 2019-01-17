@@ -3,8 +3,8 @@ package com.umich.tunisij.environment;
 public enum Direction {
     NORTH(1),
     EAST(2),
-    WEST(3),
-    SOUTH(4);
+    WEST(2),
+    SOUTH(3);
 
     private int cost;
 
