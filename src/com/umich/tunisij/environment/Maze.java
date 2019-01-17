@@ -1,5 +1,9 @@
 package com.umich.tunisij.environment;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class Maze {
 
     private String[][] maze;
@@ -8,6 +12,7 @@ public class Maze {
     private int startColumn;
     private int goalRow;
     private int goalColumn;
+    private List<Map.Entry<Integer, Integer>> wallPositions = new ArrayList<>();
 
     public Maze(final int lengthRow, final int lengthColumn) {
         this.initializeMaze(lengthRow, lengthColumn);
@@ -86,8 +91,20 @@ public class Maze {
         this.maze[row][column] = "GG";
     }
 
-    public void setWallPosition(int row, int column) {
-        this.maze[row][column] = "##";
+    public void setWallPositions(List<Map.Entry<Integer, Integer>> wallPositions) {
+        this.wallPositions = wallPositions;
+
+        for (Map.Entry<Integer, Integer> wallPosition : wallPositions) {
+            this.maze[wallPosition.getKey()][wallPosition.getValue()] = "##";
+        }
+    }
+
+    public int getLength() {
+        return this.maze[0].length;
+    }
+
+    public int getHeight() {
+        return this.maze.length;
     }
 
 }

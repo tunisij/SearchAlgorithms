@@ -1,45 +1,46 @@
 package com.umich.tunisij.environment;
 
+import com.umich.tunisij.algorithms.SearchAlgorithm;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class SearchAlgorithmRunner {
 
-    private static final int START_ROW = 4;
-    private static final int START_COLUMN = 5;
-    private static final int GOAL_ROW = 0;
-    private static final int GOAL_COLUMN = 10;
-
-    private Maze maze = new Maze(8, 11);
-
-    private int stepCounter = 0;
+    private MazeContext mazeContext = new MazeContext();
 
     public SearchAlgorithmRunner() {
         this.setMazeState();
-        this.maze.getManhattanDistance(START_ROW, START_COLUMN);
-        this.maze.displayManhattanDistance();
     }
 
-    public void step(Direction direction) {
-//        this.maze.setValueByPosition(this.stepCounter);
-    }
+    public void run(SearchAlgorithm searchAlgorithm) {
+        this.mazeContext = new MazeContext();
+        this.setMazeState();
 
-    public Maze getMaze() {
-        return this.maze;
+//        while (mazeContext.getCurrentPosition().getKey() != mazeContext.GOAL_ROW && mazeContext.getCurrentPosition().getValue() != mazeContext.GOAL_COLUMN) {
+            searchAlgorithm.step(mazeContext);
+//        }
     }
 
     private void setMazeState() {
-        this.maze.setStartPosition(START_ROW, START_COLUMN);
-        this.maze.setGoalPosition(GOAL_ROW, GOAL_COLUMN);
+        this.mazeContext.maze.setStartPosition(MazeContext.START_ROW, MazeContext.START_COLUMN);
+        this.mazeContext.maze.setGoalPosition(MazeContext.GOAL_ROW, MazeContext.GOAL_COLUMN);
 
-        this.maze.setWallPosition(2, 4);
-        this.maze.setWallPosition(2, 5);
-        this.maze.setWallPosition(2, 6);
-        this.maze.setWallPosition(2, 7);
-        this.maze.setWallPosition(3, 4);
-        this.maze.setWallPosition(3, 7);
-        this.maze.setWallPosition(4, 3);
-        this.maze.setWallPosition(4, 4);
-        this.maze.setWallPosition(4, 7);
-        this.maze.setWallPosition(5, 6);
-        this.maze.setWallPosition(5, 7);
+        List<Map.Entry<Integer, Integer>> wallPositions = new ArrayList<>();
+        wallPositions.add(Map.entry(2, 4));
+        wallPositions.add(Map.entry(2, 4));
+        wallPositions.add(Map.entry(2, 5));
+        wallPositions.add(Map.entry(2, 6));
+        wallPositions.add(Map.entry(2, 7));
+        wallPositions.add(Map.entry(3, 4));
+        wallPositions.add(Map.entry(3, 7));
+        wallPositions.add(Map.entry(4, 3));
+        wallPositions.add(Map.entry(4, 4));
+        wallPositions.add(Map.entry(4, 7));
+        wallPositions.add(Map.entry(5, 6));
+        wallPositions.add(Map.entry(5, 7));
+        this.mazeContext.maze.setWallPositions(wallPositions);
     }
 
 }
