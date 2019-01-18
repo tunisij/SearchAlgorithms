@@ -15,24 +15,24 @@ public class Maze {
     private List<Map.Entry<Integer, Integer>> wallPositions = new ArrayList<>();
 
     public Maze(final int lengthRow, final int lengthColumn) {
-        this.initializeMaze(lengthRow, lengthColumn);
+        initializeMaze(lengthRow, lengthColumn);
     }
 
     public String[][] getMaze() {
-        return this.maze;
+        return maze;
     }
 
     public boolean setValueByPosition(String value, int row, int column) {
-        if (this.maze[row][column].equals("[]")) {
-            this.maze[row][column] = value;
+        if (maze[row][column].equals("[]")) {
+            maze[row][column] = value;
             return true;
         }
         return false;
     }
 
-    public int getManhattanDistance(int fromRow, int fromColumn) {
-        int rowDiff = this.goalRow - fromRow;
-        int columnDiff = this.goalColumn - fromColumn;
+    public int getManhattanDistance(int fromRow, int fromColumn, int toRow, int toColumn) {
+        int rowDiff = toRow - fromRow;
+        int columnDiff = toColumn - fromColumn;
 
         if (rowDiff < 0) {
             rowDiff *= Direction.NORTH.getCost();
@@ -50,9 +50,9 @@ public class Maze {
     }
 
     public void displayManhattanDistance() {
-        for (int row = 0; row < this.maze.length; row++) {
+        for (int row = 0; row < maze.length; row++) {
             for (int column = 0; column < this.maze[0].length; column++) {
-                this.maze[row][column] = getManhattanDistance(row, column) + "";
+                maze[row][column] = getManhattanDistance(row, column, goalRow, goalColumn) + "";
             }
         }
         this.toString();
@@ -70,32 +70,32 @@ public class Maze {
     }
 
     private void initializeMaze(int lengthRow, int lengthColumn) {
-        this.maze =  new String[lengthRow][lengthColumn];
+        maze = new String[lengthRow][lengthColumn];
 
         for (int row = 0; row < lengthRow; row++) {
             for (int column = 0; column < lengthColumn; column++) {
-                this.maze[row][column] = "[]";
+                maze[row][column] = "[]";
             }
         }
     }
 
     public void setStartPosition(int row, int column) {
-        this.startRow = row;
-        this.startColumn = column;
-        this.maze[row][column] = "00";
+        startRow = row;
+        startColumn = column;
+        maze[row][column] = "00";
     }
 
     public void setGoalPosition(int row, int column) {
-        this.goalRow = row;
-        this.goalColumn = column;
-        this.maze[row][column] = "GG";
+        goalRow = row;
+        goalColumn = column;
+        maze[row][column] = "GG";
     }
 
     public void setWallPositions(List<Map.Entry<Integer, Integer>> wallPositions) {
         this.wallPositions = wallPositions;
 
         for (Map.Entry<Integer, Integer> wallPosition : wallPositions) {
-            this.maze[wallPosition.getKey()][wallPosition.getValue()] = "##";
+            maze[wallPosition.getKey()][wallPosition.getValue()] = "##";
         }
     }
 

@@ -38,6 +38,10 @@ public class MazeContext {
         }).collect(Collectors.toList());
     }
 
+    public Integer getManhattanDistance(Map.Entry<Integer, Integer> fromNode, Map.Entry<Integer, Integer> toNode) {
+        return maze.getManhattanDistance(fromNode.getKey(), fromNode.getValue(), toNode.getKey(), toNode.getValue());
+    }
+
     public boolean isVisited(Map.Entry<Integer, Integer> node) {
         return visited.contains(node);
     }
