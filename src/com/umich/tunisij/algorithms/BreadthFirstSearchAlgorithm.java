@@ -1,16 +1,32 @@
 package com.umich.tunisij.algorithms;
 
-import com.umich.tunisij.environment.Direction;
 import com.umich.tunisij.environment.MazeContext;
+
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 
 public class BreadthFirstSearchAlgorithm implements SearchAlgorithm {
 
-    @Override
-    public Direction step(MazeContext mazeContext) {
-//        boolean[][] visited = new boolean[][];
-        System.out.println(mazeContext.getAdjacentPositions());
+    public Queue<Map.Entry<Integer, Integer>> queue = new LinkedList<>();
 
-        return Direction.NORTH;
+    @Override
+    public void run(MazeContext mazeContext) {
+        Map.Entry<Integer, Integer> startNode = Map.entry(MazeContext.START_ROW, MazeContext.START_COLUMN);
+        queue.add(startNode);
+        mazeContext.visit(startNode);
+
+        while (!queue.isEmpty()) {
+            System.out.println(mazeContext.toString());
+            Map.Entry<Integer, Integer> node = queue.remove();
+            
+            mazeContext.getAdjacentPositions(node).forEach(neighbor -> {
+                if (!mazeContext.isVisited(neighbor)) {
+                    queue.add(neighbor);
+                    mazeContext.visit(neighbor);
+                }
+            });
+        }
     }
 
 }

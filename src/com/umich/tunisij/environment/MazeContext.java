@@ -1,39 +1,33 @@
 package com.umich.tunisij.environment;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MazeContext {
 
     protected Maze maze = new Maze(8, 11);
 
-    protected static final int START_ROW = 4;
-    protected static final int START_COLUMN = 5;
+    public static final int START_ROW = 4;
+    public static final int START_COLUMN = 5;
     protected static final int GOAL_ROW = 0;
     protected static final int GOAL_COLUMN = 10;
 
     private int stepCounter = 0;
-    private Map.Entry<Integer, Integer> currentPosition;
+    private List<Map.Entry<Integer, Integer>> visited;
 
     public MazeContext() {
-        currentPosition = Map.entry(START_ROW, START_COLUMN);
+        visited = new LinkedList<>();
     }
 
-    public Map.Entry<Integer, Integer> getCurrentPosition() {
-        return this.currentPosition;
-    }
-
-    public List<Map.Entry<Integer, Integer>> getAdjacentPositions() {
+    public List<Map.Entry<Integer, Integer>> getAdjacentPositions(Map.Entry<Integer, Integer> node) {
         List<Map.Entry<Integer, Integer>> adjacentPositions = new ArrayList<>();
-        adjacentPositions.add(Map.entry(currentPosition.getKey() + 1, currentPosition.getValue()));
-        adjacentPositions.add(Map.entry(currentPosition.getKey(), currentPosition.getValue() + 1));
-        adjacentPositions.add(Map.entry(currentPosition.getKey() - 1, currentPosition.getValue()));
-        adjacentPositions.add(Map.entry(currentPosition.getKey(), currentPosition.getValue() - 1));
+        adjacentPositions.add(Map.entry(node.getKey() + 1, node.getValue()));
+        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() + 1));
+        adjacentPositions.add(Map.entry(node.getKey() - 1, node.getValue()));
+        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() - 1));
 
         return adjacentPositions.stream().filter(position -> {
-            if (position.getKey() < 0 || position.getValue() < 0 || position.getKey() >= maze.getLength() || position.getValue() >= maze.getHeight()) {
+            if (position.getKey() < 0 || position.getValue() < 0 || position.getKey() >= maze.getHeight() || position.getValue() >= maze.getLength()) {
                 return false;
             }
             String value = maze.getMaze()[position.getKey()][position.getValue()];
@@ -44,8 +38,17 @@ public class MazeContext {
         }).collect(Collectors.toList());
     }
 
-    protected void setCurrentPosition(Direction direction) {
-//        this.currentPosition = ;
+    public boolean isVisited(Map.Entry<Integer, Integer> node) {
+        return visited.contains(node);
+    }
+
+    public void visit(Map.Entry<Integer, Integer> node) {
+        visited.add(node);
+        maze.getMaze()[node.getKey()][node.getValue()] = "" + stepCounter++;
+    }
+
+    public String toString() {
+        return maze.toString();
     }
 
 }
