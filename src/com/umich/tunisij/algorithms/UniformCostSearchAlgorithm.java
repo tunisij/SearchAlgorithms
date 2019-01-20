@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 public class UniformCostSearchAlgorithm implements SearchAlgorithm {
 
     PriorityQueue<Node> priorityQueue;
-    
+
     @Override
     public void run(MazeContext mazeContext) {
         priorityQueue = new PriorityQueue<>((nodeA, nodeB) -> {

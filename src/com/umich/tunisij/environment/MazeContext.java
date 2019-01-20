@@ -44,6 +44,10 @@ public class MazeContext {
         return maze.getManhattanDistance(fromNode.getPosition().getKey(), fromNode.getPosition().getValue(), toNode.getPosition().getKey(), toNode.getPosition().getValue());
     }
 
+    public Integer getManhattanDistanceToGoal(Node fromNode) {
+        return maze.getManhattanDistance(fromNode.getPosition().getKey(), fromNode.getPosition().getValue(), GOAL_ROW, GOAL_COLUMN);
+    }
+
     public boolean isVisited(Map.Entry<Integer, Integer> node) {
         return visited.contains(node);
     }

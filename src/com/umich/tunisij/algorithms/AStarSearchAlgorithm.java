@@ -5,6 +5,6 @@
 //public class AStarSearchAlgorithm implements SearchAlgorithm {
 //
 //    @Override
-//    public void step(MazeContext mazeContext) {
+//    public void run(MazeContext mazeContext) {
 //    }
 //}
