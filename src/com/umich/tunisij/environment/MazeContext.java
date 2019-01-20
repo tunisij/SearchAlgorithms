@@ -31,7 +31,7 @@ public class MazeContext {
             if (position.getKey() < 0 || position.getValue() < 0 || position.getKey() >= maze.getHeight() || position.getValue() >= maze.getLength()) {
                 return false;
             }
-            String value = maze.getMaze()[position.getKey()][position.getValue()];
+            String value = maze.getMaze()[position.getKey()][position.getValue()].value;
             if (value.equals("[]") || value.equals("GG")) {
                 return true;
             }
@@ -50,7 +50,7 @@ public class MazeContext {
 
     public void visit(Map.Entry<Integer, Integer> node) {
         visited.add(node);
-        maze.getMaze()[node.getKey()][node.getValue()] = "" + stepCounter++;
+        maze.getMaze()[node.getKey()][node.getValue()].visit("" + stepCounter++);
     }
 
     public String toString() {

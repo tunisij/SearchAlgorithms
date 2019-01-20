@@ -1,30 +1,28 @@
 package com.umich.tunisij.environment;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Maze {
 
-    private String[][] maze;
+    private Node[][] maze;
 
     private int startRow;
     private int startColumn;
     private int goalRow;
     private int goalColumn;
-    private List<Map.Entry<Integer, Integer>> wallPositions = new ArrayList<>();
 
     public Maze(final int lengthRow, final int lengthColumn) {
         initializeMaze(lengthRow, lengthColumn);
     }
 
-    public String[][] getMaze() {
+    public Node[][] getMaze() {
         return maze;
     }
 
     public boolean setValueByPosition(String value, int row, int column) {
-        if (maze[row][column].equals("[]")) {
-            maze[row][column] = value;
+        if (maze[row][column].value.equals("[]")) {
+            maze[row][column].value = value;
             return true;
         }
         return false;
@@ -52,7 +50,7 @@ public class Maze {
     public void displayManhattanDistance() {
         for (int row = 0; row < maze.length; row++) {
             for (int column = 0; column < this.maze[0].length; column++) {
-                maze[row][column] = getManhattanDistance(row, column, goalRow, goalColumn) + "";
+                maze[row][column].value = getManhattanDistance(row, column, goalRow, goalColumn) + "";
             }
         }
         this.toString();
@@ -62,7 +60,7 @@ public class Maze {
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < maze.length; row++) {
             for (int column = 0; column < maze[row].length; column++) {
-                sb.append(maze[row][column] + "\t");
+                sb.append(maze[row][column].value + "\t");
             }
             sb.append("\n");
         }
@@ -70,11 +68,12 @@ public class Maze {
     }
 
     private void initializeMaze(int lengthRow, int lengthColumn) {
-        maze = new String[lengthRow][lengthColumn];
+        maze = new Node[lengthRow][lengthColumn];
 
         for (int row = 0; row < lengthRow; row++) {
             for (int column = 0; column < lengthColumn; column++) {
-                maze[row][column] = "[]";
+                maze[row][column] = new Node(Map.entry(row, column), getManhattanDistance(row, column, startRow, startColumn), null);
+                maze[row][column].value = "[]";
             }
         }
     }
@@ -82,20 +81,18 @@ public class Maze {
     public void setStartPosition(int row, int column) {
         startRow = row;
         startColumn = column;
-        maze[row][column] = "00";
+        maze[row][column].value = "0";
     }
 
     public void setGoalPosition(int row, int column) {
         goalRow = row;
         goalColumn = column;
-        maze[row][column] = "GG";
+        maze[row][column].value = "GG";
     }
 
     public void setWallPositions(List<Map.Entry<Integer, Integer>> wallPositions) {
-        this.wallPositions = wallPositions;
-
         for (Map.Entry<Integer, Integer> wallPosition : wallPositions) {
-            maze[wallPosition.getKey()][wallPosition.getValue()] = "##";
+            maze[wallPosition.getKey()][wallPosition.getValue()].value = "##";
         }
     }
 
