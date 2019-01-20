@@ -28,6 +28,8 @@ public class GreedyBestFirstSearchAlgorithm implements SearchAlgorithm {
 
         while (!priorityQueue.isEmpty()) {
             System.out.println(mazeContext.toString());
+//            priorityQueue.forEach(node -> System.out.println("Node " + node.getValue() + ": " + mazeContext.getManhattanDistanceToGoal(node)));
+
             Node node = priorityQueue.remove();
 
             mazeContext.getAdjacentPositions(node.getPosition()).forEach(neighborPosition -> {

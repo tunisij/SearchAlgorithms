@@ -1,6 +1,6 @@
 package com.umich.tunisij;
 
-import com.umich.tunisij.algorithms.GreedyBestFirstSearchAlgorithm;
+import com.umich.tunisij.algorithms.AStarSearchAlgorithm;
 import com.umich.tunisij.environment.SearchAlgorithmRunner;
 
 public class SearchAlgorithmMain {
@@ -10,6 +10,7 @@ public class SearchAlgorithmMain {
 //        sar.run(new BreadthFirstSearchAlgorithm());
 //        sar.run(new DepthFirstSearchAlgorithm());
 //        sar.run(new UniformCostSearchAlgorithm());
-        sar.run(new GreedyBestFirstSearchAlgorithm());
+//        sar.run(new GreedyBestFirstSearchAlgorithm());
+        sar.run(new AStarSearchAlgorithm());
     }
 }
