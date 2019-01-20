@@ -31,7 +31,7 @@ public class MazeContext {
             if (position.getKey() < 0 || position.getValue() < 0 || position.getKey() >= maze.getHeight() || position.getValue() >= maze.getLength()) {
                 return false;
             }
-            String value = maze.getMaze()[position.getKey()][position.getValue()].value;
+            String value = maze.getMaze()[position.getKey()][position.getValue()].getValue();
             if (value.equals("[]") || value.equals("GG")) {
                 return true;
             }
@@ -40,8 +40,8 @@ public class MazeContext {
         return adjacentPositions;
     }
 
-    public Integer getManhattanDistance(Map.Entry<Integer, Integer> fromNode, Map.Entry<Integer, Integer> toNode) {
-        return maze.getManhattanDistance(fromNode.getKey(), fromNode.getValue(), toNode.getKey(), toNode.getValue());
+    public Integer getManhattanDistance(Node fromNode, Node toNode) {
+        return maze.getManhattanDistance(fromNode.getPosition().getKey(), fromNode.getPosition().getValue(), toNode.getPosition().getKey(), toNode.getPosition().getValue());
     }
 
     public boolean isVisited(Map.Entry<Integer, Integer> node) {
@@ -51,6 +51,10 @@ public class MazeContext {
     public void visit(Map.Entry<Integer, Integer> node) {
         visited.add(node);
         maze.getMaze()[node.getKey()][node.getValue()].visit("" + stepCounter++);
+    }
+
+    public Node getNode(Map.Entry<Integer, Integer> position) {
+        return maze.getNode(position);
     }
 
     public String toString() {
