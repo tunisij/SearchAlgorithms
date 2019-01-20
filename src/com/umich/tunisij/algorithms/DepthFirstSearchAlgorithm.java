@@ -2,8 +2,7 @@ package com.umich.tunisij.algorithms;
 
 import com.umich.tunisij.environment.MazeContext;
 
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class DepthFirstSearchAlgorithm implements SearchAlgorithm {
 
@@ -19,12 +18,16 @@ public class DepthFirstSearchAlgorithm implements SearchAlgorithm {
             System.out.println(mazeContext.toString());
             Map.Entry<Integer, Integer> node = stack.pop();
 
+            List<Map.Entry<Integer, Integer>> neighbors = new ArrayList<>();
             mazeContext.getAdjacentPositions(node).forEach(neighbor -> {
                 if (!mazeContext.isVisited(neighbor)) {
-                    stack.add(neighbor);
                     mazeContext.visit(neighbor);
+                    neighbors.add(neighbor);
                 }
             });
+
+            Collections.reverse(neighbors);
+            neighbors.forEach(neighbor -> stack.add(neighbor));
         }
 
     }

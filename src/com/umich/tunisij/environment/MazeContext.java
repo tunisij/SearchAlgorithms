@@ -21,12 +21,13 @@ public class MazeContext {
 
     public List<Map.Entry<Integer, Integer>> getAdjacentPositions(Map.Entry<Integer, Integer> node) {
         List<Map.Entry<Integer, Integer>> adjacentPositions = new ArrayList<>();
-        adjacentPositions.add(Map.entry(node.getKey() + 1, node.getValue()));
-        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() + 1));
-        adjacentPositions.add(Map.entry(node.getKey() - 1, node.getValue()));
-        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() - 1));
+        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() - 1)); //west
+        adjacentPositions.add(Map.entry(node.getKey() - 1, node.getValue())); //north
+        adjacentPositions.add(Map.entry(node.getKey(), node.getValue() + 1)); //east
+        adjacentPositions.add(Map.entry(node.getKey() + 1, node.getValue())); //south
 
-        return adjacentPositions.stream().filter(position -> {
+
+        adjacentPositions = adjacentPositions.stream().filter(position -> {
             if (position.getKey() < 0 || position.getValue() < 0 || position.getKey() >= maze.getHeight() || position.getValue() >= maze.getLength()) {
                 return false;
             }
@@ -36,6 +37,7 @@ public class MazeContext {
             }
             return false;
         }).collect(Collectors.toList());
+        return adjacentPositions;
     }
 
     public Integer getManhattanDistance(Map.Entry<Integer, Integer> fromNode, Map.Entry<Integer, Integer> toNode) {
