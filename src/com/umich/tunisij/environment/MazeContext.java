@@ -12,11 +12,11 @@ public class MazeContext {
     protected static final int GOAL_ROW = 0;
     protected static final int GOAL_COLUMN = 10;
 
-    private int stepCounter = 0;
+    private int stepCounter;
     private List<Map.Entry<Integer, Integer>> visited;
 
     public MazeContext() {
-        visited = new LinkedList<>();
+        setMazeState();
     }
 
     public List<Map.Entry<Integer, Integer>> getAdjacentPositions(Map.Entry<Integer, Integer> node) {
@@ -57,6 +57,10 @@ public class MazeContext {
         maze.getMaze()[node.getKey()][node.getValue()].visit("" + stepCounter++);
     }
 
+    public boolean isGoalReached() {
+        return maze.getMaze()[GOAL_ROW][GOAL_COLUMN].isVisited();
+    }
+
     public Node getNode(Map.Entry<Integer, Integer> position) {
         return maze.getNode(position);
     }
@@ -65,4 +69,30 @@ public class MazeContext {
         return maze.toString();
     }
 
+    public void setMazeState() {
+        maze = new Maze(8, 11);
+        maze.setStartPosition(START_ROW, START_COLUMN);
+        maze.setGoalPosition(GOAL_ROW, GOAL_COLUMN);
+        setWallPositions();
+        visited = new LinkedList<>();
+        stepCounter = 0;
+    }
+
+    public void setWallPositions() {
+        List<Map.Entry<Integer, Integer>> wallPositions = new ArrayList<>();
+        wallPositions.add(Map.entry(2, 4));
+        wallPositions.add(Map.entry(2, 4));
+        wallPositions.add(Map.entry(2, 5));
+        wallPositions.add(Map.entry(2, 6));
+        wallPositions.add(Map.entry(2, 7));
+        wallPositions.add(Map.entry(3, 4));
+        wallPositions.add(Map.entry(3, 7));
+        wallPositions.add(Map.entry(4, 3));
+        wallPositions.add(Map.entry(4, 4));
+        wallPositions.add(Map.entry(4, 7));
+        wallPositions.add(Map.entry(5, 6));
+        wallPositions.add(Map.entry(5, 7));
+
+        maze.setWallPositions(wallPositions);
+    }
 }

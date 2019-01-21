@@ -16,6 +16,13 @@ public class Node {
         this.previous = previous;
     }
 
+    public int getDepth() {
+        if (previous == null) {
+            return 0;
+        }
+        return previous.getDepth() + 1;
+    }
+
     public void visit(String value) {
         this.value = value;
         this.visited = true;

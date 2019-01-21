@@ -23,8 +23,7 @@ public class UniformCostSearchAlgorithm implements SearchAlgorithm {
         priorityQueue.add(startNode);
         mazeContext.visit(startNode.getPosition());
 
-        while (!priorityQueue.isEmpty()) {
-            System.out.println(mazeContext.toString());
+        while (!priorityQueue.isEmpty() && !mazeContext.isGoalReached()) {
             Node node = priorityQueue.remove();
 
             mazeContext.getAdjacentPositions(node.getPosition()).forEach(neighborPosition -> {

@@ -67,7 +67,7 @@ public class Maze {
         return sb.toString();
     }
 
-    private void initializeMaze(int lengthRow, int lengthColumn) {
+    protected void initializeMaze(int lengthRow, int lengthColumn) {
         maze = new Node[lengthRow][lengthColumn];
 
         for (int row = 0; row < lengthRow; row++) {

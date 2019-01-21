@@ -14,8 +14,7 @@ public class DepthFirstSearchAlgorithm implements SearchAlgorithm {
         stack.add(startNode);
         mazeContext.visit(startNode);
 
-        while(!stack.isEmpty()) {
-            System.out.println(mazeContext.toString());
+        while(!stack.isEmpty() && !mazeContext.isGoalReached()) {
             Map.Entry<Integer, Integer> node = stack.pop();
 
             List<Map.Entry<Integer, Integer>> neighbors = new ArrayList<>();

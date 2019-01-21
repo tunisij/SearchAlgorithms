@@ -16,8 +16,7 @@ public class BreadthFirstSearchAlgorithm implements SearchAlgorithm {
         queue.add(startNode);
         mazeContext.visit(startNode);
 
-        while (!queue.isEmpty()) {
-            System.out.println(mazeContext.toString());
+        while (!queue.isEmpty() && !mazeContext.isGoalReached()) {
             Map.Entry<Integer, Integer> node = queue.remove();
             
             mazeContext.getAdjacentPositions(node).forEach(neighbor -> {

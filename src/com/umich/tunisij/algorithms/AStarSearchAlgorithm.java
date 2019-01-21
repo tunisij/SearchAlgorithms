@@ -26,10 +26,7 @@ public class AStarSearchAlgorithm implements SearchAlgorithm {
         priorityQueue.add(startNode);
         mazeContext.visit(startNode.getPosition());
 
-        while (!priorityQueue.isEmpty()) {
-            System.out.println(mazeContext.toString());
-            priorityQueue.forEach(node -> System.out.println("Node " + node.getValue() + ": Distance: " + node.getDistance() + " + Manhattan: " + mazeContext.getManhattanDistanceToGoal(node) + " = " + (node.getDistance() + mazeContext.getManhattanDistanceToGoal(node))));
-
+        while (!priorityQueue.isEmpty() && !mazeContext.isGoalReached()) {
             Node node = priorityQueue.remove();
 
             mazeContext.getAdjacentPositions(node.getPosition()).forEach(neighborPosition -> {
