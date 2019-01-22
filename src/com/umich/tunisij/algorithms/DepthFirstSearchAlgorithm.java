@@ -1,26 +1,29 @@
 package com.umich.tunisij.algorithms;
 
 import com.umich.tunisij.environment.MazeContext;
+import com.umich.tunisij.environment.Node;
 
 import java.util.*;
 
 public class DepthFirstSearchAlgorithm implements SearchAlgorithm {
 
-    Stack<Map.Entry<Integer, Integer>> stack = new Stack<>();
+    Stack<Node> stack = new Stack<>();
 
     @Override
     public void run(MazeContext mazeContext) {
-        Map.Entry<Integer, Integer> startNode = Map.entry(MazeContext.START_ROW, MazeContext.START_COLUMN);
+        Node startNode = mazeContext.getNode(Map.entry(MazeContext.START_ROW, MazeContext.START_COLUMN));
         stack.add(startNode);
-        mazeContext.visit(startNode);
+        mazeContext.visit(startNode.getPosition());
 
         while(!stack.isEmpty() && !mazeContext.isGoalReached()) {
-            Map.Entry<Integer, Integer> node = stack.pop();
+            Node node = stack.pop();
 
-            List<Map.Entry<Integer, Integer>> neighbors = new ArrayList<>();
-            mazeContext.getAdjacentPositions(node).forEach(neighbor -> {
-                if (!mazeContext.isVisited(neighbor)) {
-                    mazeContext.visit(neighbor);
+            List<Node> neighbors = new ArrayList<>();
+            mazeContext.getAdjacentPositions(node.getPosition()).forEach(neighborPosition -> {
+                if (!mazeContext.isVisited(neighborPosition)) {
+                    Node neighbor = mazeContext.getNode(neighborPosition);
+                    neighbor.setPrevious(node);
+                    mazeContext.visit(neighborPosition);
                     neighbors.add(neighbor);
                 }
             });

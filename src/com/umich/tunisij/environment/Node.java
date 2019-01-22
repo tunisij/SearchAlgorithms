@@ -67,4 +67,11 @@ public class Node {
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
+
+    public String toString() {
+        if (previous == null) {
+            return getValue();
+        }
+        return previous.toString() + "\t" + getValue();
+    }
 }

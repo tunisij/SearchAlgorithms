@@ -14,18 +14,9 @@ public class IterativeDeepeningSearchAlgorithm implements SearchAlgorithm {
     public void run(MazeContext mazeContext) {
         this.mazeContext = mazeContext;
         Node startNode = mazeContext.getNode(Map.entry(MazeContext.START_ROW, MazeContext.START_COLUMN));
-//        stack.add(startNode);
-//        mazeContext.visit(startNode.getPosition());
-
-//        for (int depth = 0; depth < 4; depth++) {
-//            System.out.println(mazeContext.toString());
-//            mazeContext.setMazeState();
-//            depthLimitedSearch(startNode, depth);
-//        }
 
         int depth = 0;
         while (!mazeContext.isGoalReached()) {
-//            System.out.println(mazeContext.toString());
             mazeContext.setMazeState();
             depthLimitedSearch(startNode, depth++);
         }
