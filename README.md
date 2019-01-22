@@ -14,6 +14,7 @@ Tue Jan 22 18:32:17 EST 2019
 
 Route taken: 0	3	6	9	14	20	27	36	45	53	60	67	73	76
 
+
 class com.umich.tunisij.algorithms.DepthFirstSearchAlgorithm
 Tue Jan 22 18:32:17 EST 2019
 
@@ -29,6 +30,7 @@ Tue Jan 22 18:32:17 EST 2019
 | [] | [] | [] | [] | [] | [] | [] | [] | [] | [] | [] |
 
 Route taken: 0	3	5	7	9	11	14	17	19	20	22	24	26	27	28	30	32	34	36	38	40	42
+
 
 class com.umich.tunisij.algorithms.UniformCostSearchAlgorithm
 Tue Jan 22 18:32:17 EST 2019
@@ -46,6 +48,7 @@ Tue Jan 22 18:32:17 EST 2019
 
 Route taken: 0	3	6	9	14	20	30	38	48	55	62	67	72	76
 
+
 class com.umich.tunisij.algorithms.GreedyBestFirstSearchAlgorithm
 Tue Jan 22 18:32:17 EST 2019
 
@@ -62,6 +65,7 @@ Tue Jan 22 18:32:17 EST 2019
 
 Route taken: 0	3	6	8	10	12	15	18	20	22	24	26	28	30
 
+
 class com.umich.tunisij.algorithms.AStarSearchAlgorithm
 Tue Jan 22 18:32:17 EST 2019
 
@@ -77,6 +81,7 @@ Tue Jan 22 18:32:17 EST 2019
 | [] | [] | [] | [] | [] | 10 | 12 | 14 | 17 | 21 | 25 |	
 
 Route taken: 0	3	6	9	11	13	15	18	22	26	31	33	38	39
+
 
 class com.umich.tunisij.algorithms.IterativeDeepeningSearchAlgorithm
 Tue Jan 22 18:32:17 EST 2019
